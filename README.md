@@ -1,11 +1,11 @@
 # 📌 Fake News Detection
-
+[![fefwefew.png](https://i.postimg.cc/x1dbV0P1/fefwefew.png)](https://postimg.cc/svt2pC8k)
 ## 🔍 Overview
 โครงการนี้เป็นระบบ **ตรวจสอบความน่าเชื่อถือของข่าว** โดยใช้ **Machine Learning** และ **Natural Language Processing (NLP)** เพื่อตรวจจับข่าวปลอมจากเนื้อหาข่าวแบบข้อความ
 
 ## ⚙️ การทำงานของระบบ
 1. **โหลดและประมวลผลข้อมูล**
-   - ดึงข้อมูลจากแหล่งข่าวและ URL
+   - ดึงข้อมูลจากแหล่งข่าว
    - แปลงข้อความเป็นเวกเตอร์ด้วย **DEBERT หรือ BERT Wangchan**
    - ใช้ **Logistic Regression** เป็นโมเดลหลักในการจำแนกข่าวจริง-ข่าวปลอม
 
@@ -28,11 +28,10 @@
 pip install -r requirements.txt
 ```
 
-### 2️⃣ รันโค้ดเพื่อฝึกโมเดล
+### 2️⃣ รันโค้ด main.py 
 ```bash
 sentence = str(input('\nEnter Sentence : '))
-models = joblib.load('model.lr.pkl')
-result = Sentence([sentence], models)
+result = Sentence([sentence])
 
-# ใส่ข้อความ input ลงใน sentence และรันได้ใน ipynb
+# ใส่ข้อความ input ลงใน sentence
 ```

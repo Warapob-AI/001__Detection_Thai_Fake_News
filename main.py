@@ -23,8 +23,11 @@ class InputText(BaseModel):
 @app.post("/fakenews")
 def predict_text(input_data: InputText):
     sentence = input_data.text
-    # ดึงผลลัพธ์จากโมเดลจริง ๆ ที่คุณเขียนไว้
     result = Sentence([sentence])
     print(result)
     return {"result": result}
 
+# ✅ เพิ่มตรงนี้ เพื่อให้ Railway รู้วิธีรัน API
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8080)

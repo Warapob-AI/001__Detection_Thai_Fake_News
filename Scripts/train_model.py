@@ -1,4 +1,5 @@
-from feature_ import encode_sentences
+from matplotlib import pyplot as plt
+from .feature import encode_sentences
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -21,9 +22,9 @@ def Logistic_Regression(fake_news_features, true_news_features):
     model.fit(x_train, y_train) 
     y_pred = model.predict(x_test)  
 
-    joblib.dump(model, '001__Detection_Thai_Fake_News/Model/model.lr.pkl')
+    joblib.dump(model, 'my-portfolio-web/001__Detection_Thai_Fake_News/Model/model_lr.pkl')
 
-    return name, y_pred, y_test
+    return x_train, x_test, y_train, y_test, y_pred, name
 
 def Classification_Report(name, y_test, y_pred): 
     accuracy = accuracy_score(y_test, y_pred)
@@ -46,7 +47,7 @@ def Classification_Report(name, y_test, y_pred):
         print("Confusion matrix is not binary. Please check the number of classes.")
 
 def Sentence(data_list):
-    model_train = joblib.load('001__Detection_Thai_Fake_News/Model/model.lr.pkl')
+    model_train = joblib.load('Model/model_lr.pkl')
     global count_true_news, count_fake_news
     sentence_vectorizer = encode_sentences(data_list)
     sentence_pred = model_train.predict(sentence_vectorizer)
@@ -73,8 +74,34 @@ def Sentence(data_list):
     else: 
         labels = 'ข่าวจริง'
 
-    return f'ข่าว: {data_list[0]} || {labels}: {sentence_accuracy:.2f}%'
+    return f'{labels} ({sentence_accuracy:.2f}%)'
 
+def Learning_Curve(x_train, x_test, y_train, y_test):
+    model = joblib.load('001__Detection_Thai_Fake_News/Model/model.lr.pkl')
+
+    # คำนวณ accuracy สำหรับ training และ test sets
+    train_pred = model.predict(x_train)
+    train_accuracy = accuracy_score(y_train, train_pred)
+    
+    test_pred = model.predict(x_test)
+    test_accuracy = accuracy_score(y_test, test_pred)
+
+    # แสดงผล accuracy
+    print(f'Train Accuracy: {train_accuracy * 100:.2f}% | Test Accuracy: {test_accuracy * 100:.2f}%')
+
+    # สร้างกราฟเส้น (Line chart)
+    plt.figure(figsize=(10, 6))
+    plt.plot(['Train'], [train_accuracy], label='Train Accuracy', marker='o', color='blue')
+    plt.plot(['Test'], [test_accuracy], label='Test Accuracy', marker='o', color='orange')
+
+    plt.title('Train vs Test Accuracy')
+    plt.xlabel('Dataset')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.ylim([0, 1])  # Set the y-axis limit to [0, 1] for clarity
+    plt.grid(True)
+    plt.show()
+    
 def Test_Fake_News(data_list): 
     Sentence(data_list)
     print(f'ในการทดสอบข่าวปลอมทั้งหมด {len(data_list)} ข่าว, โมเดลทำนายผิดว่าเป็นข่าวจริง : {count_true_news} ข่าว')

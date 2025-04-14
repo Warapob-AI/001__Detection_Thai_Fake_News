@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from Scripts.train_model import Sentence
 
+
 path_model = 'Model/model_lr.pkl'
 
 app = FastAPI()

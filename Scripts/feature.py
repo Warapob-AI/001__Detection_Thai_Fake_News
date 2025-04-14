@@ -58,8 +58,8 @@ def Text_To_BERT(fake_news, true_news):
     return fake_news_features, true_news_features
 
 def Save_Vectorizer(fake_news, true_news):
-    joblib.dump(fake_news, 'my-portfolio-web/001__Detection_Thai_Fake_News/Model/fake_news_features.pkl')
-    joblib.dump(true_news, 'my-portfolio-web/001__Detection_Thai_Fake_News/Model/true_news_features.pkl')
+    joblib.dump(fake_news, 'Model/fake_news_features.pkl')
+    joblib.dump(true_news, 'Model/true_news_features.pkl')
 
 def Load_Vectorizer(fake_news, true_news): 
     # โหลดเวกเตอร์จากไฟล์

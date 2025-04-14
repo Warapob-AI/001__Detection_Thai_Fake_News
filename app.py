@@ -14,7 +14,7 @@ def predict_text(input_data):
     result = Sentence([sentence])
     return result
 
-def gradio_interface(input_data):
+def interface(input_data):
     if os.path.exists(path_model):
         return predict_text(input_data)
 
@@ -30,9 +30,6 @@ def gradio_interface(input_data):
         fake_news_vec, true_news_vec = Text_To_BERT(fake_news, true_news)
         Save_Vectorizer(fake_news_vec, true_news_vec)
         return "Vectorizer Saved and Data Preprocessed"
+    
 
-# Gradio UI
-interface = gr.Interface(fn=gradio_interface, inputs="text", outputs="text", live=True)
 
-if __name__ == "__main__":
-    interface.launch()

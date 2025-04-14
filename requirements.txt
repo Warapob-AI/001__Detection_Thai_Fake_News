@@ -10,3 +10,4 @@ uvicorn
 matplotlib
 huggingface_hub
 vercel
+mangum

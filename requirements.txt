@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fastapi==0.115.12
 joblib==1.4.2
 mangum==0.19.0
@@ -10,3 +11,16 @@ scikit_learn==1.6.1
 torch==2.6.0
 transformers==4.51.1
 uvicorn==0.34.2
+=======
+torch
+transformers
+gradio
+numpy
+scikit-learn
+pythainlp
+joblib
+fastapi
+uvicorn
+matplotlib
+huggingface_hub
+>>>>>>> 39a21087d3f37c92b3e469d4bb4ee1430b13e831
